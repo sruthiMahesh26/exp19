@@ -1,15 +1,22 @@
 name: Deploy Site
 
-on: push
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write   # ✅ IMPORTANT (fixes git error)
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4   # ✅ updated version
 
-      - uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4   # ✅ updated version
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
